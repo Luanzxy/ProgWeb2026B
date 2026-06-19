@@ -42,15 +42,11 @@ def list_produto_view(request, id=None):
         if id is not None:
             produtos = produtos.filter(id=id)
         print(produtos)
-# Adicione para definir o contexto e carregar o template
     context = {'produtos': produtos}
     return render(request, template_name='produto/produto.html',context=context, status=200)
 
-# adicione a função que trata o postback da interface de edição
 def edit_produto_postback(request, id=None):
-    # Processa o post back gerado pela action
     if request.method == 'POST':
-        # Salva dados editados
         id = request.POST.get("id")
         produto = request.POST.get("Produto")
         destaque = request.POST.get("destaque")
@@ -108,7 +104,6 @@ def delete_produto_view(request, id=None):
 
 def delete_produto_postback(request, id=None):
     if request.method == 'POST':
-    # Salva dados editados
         id = request.POST.get("id")
         produto = request.POST.get("Produto")
         print("postback-delete")
@@ -135,34 +130,24 @@ def create_produto_view(request, id=None):
         msgPromocao = request.POST.get("msgPromocao")
         preco = request.POST.get("preco")
         image = request.POST.get("image")
-        
-        # ADICIONADO: Captura os IDs do formulário
         categoria_id = request.POST.get("CategoriaFk")
         fabricante_id = request.POST.get("FabricanteFk")
-        
         try:
             obj_produto = Produto()
             obj_produto.Produto = produto
             obj_produto.destaque = (destaque is not None)
             obj_produto.promocao = (promocao is not None)
-            
-            # ADICIONADO: Associa os objetos de Fabricante e Categoria ao novo produto
             if fabricante_id and fabricante_id != "-1":
                 obj_produto.fabricante = Fabricante.objects.filter(id=fabricante_id).first()
             if categoria_id and categoria_id != "-1":
-                obj_produto.categoria = Categoria.objects.filter(id=categoria_id).first()
-                
+                obj_produto.categoria = Categoria.objects.filter(id=categoria_id).first()          
             if msgPromocao is not None:
-                obj_produto.msgPromocao = msgPromocao
-            
+                obj_produto.msgPromocao = msgPromocao          
             obj_produto.preco = 0
             if (preco is not None) and (preco != ""):
-                obj_produto.preco = preco
-                
+                obj_produto.preco = preco   
             obj_produto.criado_em = timezone.now()
             obj_produto.alterado_em = obj_produto.criado_em
-            
-            # Se for anexado arquivo, salva na pasta e guarda nome no objeto
             if request.FILES:
                 num_files = len(request.FILES.getlist('image'))
                 if num_files > 0:
@@ -185,4 +170,3 @@ def create_produto_view(request, id=None):
     }
     return render(request, template_name='produto/produto-create.html', context=context, status=200)
 
-#dddd
