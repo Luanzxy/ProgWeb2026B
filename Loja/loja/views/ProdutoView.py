@@ -184,3 +184,5 @@ def create_produto_view(request, id=None):
         'categorias': categorias
     }
     return render(request, template_name='produto/produto-create.html', context=context, status=200)
+
+#dddd
