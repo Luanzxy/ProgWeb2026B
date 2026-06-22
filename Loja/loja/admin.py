@@ -15,8 +15,8 @@ class ProdutoAdmin(admin.ModelAdmin):
     fields = ('Produto', 'destaque', 'promocao',
 'msgPromocao', 'preco', 'categoria',)
     
-
 from .models import * #imporata nossos models
 admin.site.register(Fabricante, FabricanteAdmin) #adiciona a interface do adm
 admin.site.register(Categoria)
 admin.site.register(Produto, ProdutoAdmin)
+admin.site.register(Usuario)
