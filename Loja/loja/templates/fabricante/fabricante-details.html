@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Início{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <h5 class="col-md-2">ID</h5>
+            <input value="{{ fabricante.id }}" readonly>
+        </div>
+        <div class="row mt-2">
+            <h5 class="col-md-2">Fabricantes</h5>
+            <input value="{{ fabricante.Fabricante }}" readonly>
+        </div>
+        <div class="row">
+            <a href="{% url 'fabricantes' %}" class="btn bg-secondary col-md-2 mt-3"><i class="fa fa-rotate-left"></i> Retornar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

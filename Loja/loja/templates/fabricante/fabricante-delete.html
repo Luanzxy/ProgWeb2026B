@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Início{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+<div id="content">
+    <div class="container">
+        <form method="POST" action="/fabricante/delete">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ fabricante.id }}">
+            <div class="row">
+                <h5 class="col-md-2">Fabricantes</h5>
+                <input value="{{ fabricante.Fabricante }}" readonly>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-danger col-md-2 mt-3 mr-2"><i class="fa fa-trash"></i> Excluir</button>
+                <a href="{% url 'fabricantes' %}" class="btn bg-secondary col-md-2 mt-3"><i class="fa fa-rotate-left"></i> Retornar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}
