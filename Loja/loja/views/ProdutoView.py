@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect # Retire from django.http import HttpResponse
 from loja.models import Produto, Fabricante, Categoria
 from datetime import timedelta, datetime
@@ -6,6 +7,7 @@ from django.core.files.storage import FileSystemStorage
 import os
 from django.conf import settings
 
+@login_required
 def edit_produto_view(request, id=None):
     produtos = Produto.objects.all()
     if id is not None:
