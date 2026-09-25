@@ -34,11 +34,19 @@
             <div class="image-circle" style="background-image:url('/media/{{prod.image}}');"></div>
             <div class="card-body">
                 <h5 class="card-title">{{prod.Produto}}</h5>
-                <a href="{% url 'home' %}" class="btn btn-primary btn-card">
-                    <i class="fa fa-search"></i> Ver
-                </a>
-                <button class="btn btn-warning btn-card">
-                <i class="fa fa-heart"></i> Favoritar</button>
+                <div class="mb-2">
+                    <a href="{% url 'details_produto' prod.id %}" class="btn btn-primary btn-card">
+                        <i class="fa fa-search"></i> Ver
+                    </a>
+                    <a href="{% url 'favoritar_produto' prod.id %}" class="btn btn-warning text-white btn-card">
+                        <i class="fa fa-heart"></i> Favoritar
+                    </a>
+                </div>
+                <div>
+                    <a href="{% url 'create_carrinhoitem' prod.id %}" class="btn btn-primary btn-card w-100 mt-1">
+                        <i class="fa fa-plus"></i> Comprar
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -47,4 +55,4 @@
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'js/home.js' %}"></script>
-{% endblock %}  
+{% endblock %}

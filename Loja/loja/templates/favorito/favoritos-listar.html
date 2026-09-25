@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Meus Favoritos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="alert alert-info">
+        <h3>Meus Produtos Favoritos</h3>
+    </div>
+
+    {% if favoritos %}
+        <div class="row">
+            {% for item in favoritos %}
+            <div class="col-xs-9 col-md-3 col-lg-3">
+                <div class="card mb-4">
+                    <div class="image-circle" style="background-image:url('/media/{{ item.produto.image }}');"></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.produto.Produto }}</h5>
+                        <div class="mb-2">
+                            <a href="{% url 'favoritar_produto' item.produto.id %}" class="btn btn-danger btn-sm w-100">
+                                <i class="fa fa-trash"></i> Remover dos Favoritos
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'create_carrinhoitem' item.produto.id %}" class="btn btn-primary btn-card w-100 mt-1">
+                                <i class="fa fa-plus"></i> Comprar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            Você ainda não adicionou nenhum produto aos favoritos.
+        </div>
+        <a href="{% url 'home' %}" class="btn btn-primary">Ir para a loja</a>
+    {% endif %}
+</div>
+{% endblock %}
